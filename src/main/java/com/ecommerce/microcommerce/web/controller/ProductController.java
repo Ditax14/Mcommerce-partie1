@@ -59,7 +59,14 @@ public class ProductController {
         return produitsFiltres;
     }
 
+    //Liste des produits triés par ordre alpahbétique
+    @ApiOperation(value = "Liste des produits classés par ordre Alphabétique")
+    @GetMapping(value = "/ProduitsAlpha")
+    public List<Product> trierProduitsParOrdreAlphabetique() {
 
+    	return productDao.findAllByOrderByNom();
+    }
+    
     //Récupérer un produit par son Id
     @ApiOperation(value = "Récupère un produit grâce à son ID à condition que celui-ci soit en stock!")
     @GetMapping(value = "/Produits/{id}")
