@@ -7,6 +7,25 @@
 	"item": [
 		{
 			"name": "http://localhost:9090/Produits",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4b1364d9-eb1c-4b67-b91f-47802c7b2601",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Location is present\", function () {",
+							"    pm.response.to.have.header(\"Location\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -37,6 +56,26 @@
 		},
 		{
 			"name": "http://localhost:9090/Produits/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "46d9d1b7-ada8-4f51-be0e-9120d5fc469a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response contains pre-filed products (Ordinateur Portable, Aspirateur Robot, Table de Ping Pong)\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"[{\\\"id\\\":1,\\\"nom\\\":\\\"Ordinateur portable\\\",\\\"prix\\\":350,\\\"prixAchat\\\":120},{\\\"id\\\":2,\\\"nom\\\":\\\"Aspirateur Robot\\\",\\\"prix\\\":500,\\\"prixAchat\\\":200},{\\\"id\\\":3,\\\"nom\\\":\\\"Table de Ping Pong\\\",\\\"prix\\\":750,\\\"prixAchat\\\":400}\");",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -57,6 +96,33 @@
 		},
 		{
 			"name": "http://localhost:9090/AdminProduits",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "aa302cba-42f9-418f-bd36-47c352c61b29",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Right margin calculation for product 'Ordinateur portable'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"\\\"Product{id=1, nom='Ordinateur portable', prix=350}\\\":230\");",
+							"});",
+							"",
+							"pm.test(\"Right margin calculation for product 'Table de Ping Pong'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"\\\"Product{id=3, nom='Table de Ping Pong', prix=750}\\\":350\");",
+							"});",
+							"",
+							"pm.test(\"Right margin calculation for product 'Aspirateur Robot\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"\\\"Product{id=2, nom='Aspirateur Robot', prix=500}\\\":300\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -76,6 +142,25 @@
 		},
 		{
 			"name": "http://localhost:9090/ProduitsAlpha",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2da31598-4811-4f81-a5c6-0bf9c5f62f05",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Checking right order in response\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"[{\\\"id\\\":2,\\\"nom\\\":\\\"Aspirateur Robot\\\",\\\"prix\\\":500,\\\"prixAchat\\\":200},{\\\"id\\\":1,\\\"nom\\\":\\\"Ordinateur portable\\\",\\\"prix\\\":350,\\\"prixAchat\\\":120},{\\\"id\\\":3,\\\"nom\\\":\\\"Table de Ping Pong\\\",\\\"prix\\\":750,\\\"prixAchat\\\":400}\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -95,6 +180,20 @@
 		},
 		{
 			"name": "http://localhost:9090/Produits",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a3cd45da-9ed9-4fce-8272-8f35ca4195bc",
+						"exec": [
+							"pm.test(\"Status code is 403\", function () {",
+							"    pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -125,6 +224,25 @@
 		},
 		{
 			"name": "http://localhost:9090/Produits/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e7376868-6daa-47c4-bfc8-57b64d703c1f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Free product not added\", function () {",
+							"    pm.expect(pm.response.text()).not.to.include(\"produit gratuit\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
